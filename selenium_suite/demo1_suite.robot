@@ -1,6 +1,6 @@
 *** Settings ***
 Library     SeleniumLibrary
-#basic selenium
+#basic selenium - day1 
 *** Test Cases ***
 TC1
     Open Browser    url=https://www.facebook.com/       browser=chrome
