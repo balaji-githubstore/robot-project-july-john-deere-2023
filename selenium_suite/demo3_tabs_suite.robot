@@ -47,3 +47,14 @@ TC2
     #get the title from 1st tab and print
     Sleep    5s
     [Teardown]   Run Keywords   Close Browser  AND  Log  Browser Close done
+
+TC4
+    Open Browser    browser=chrome
+    Maximize Browser Window
+    Set Selenium Implicit Wait    10s
+    Go To    url=https://www.db4free.net/
+    Sleep    2s
+    Press Keys  None    CONTROL+SHIFT+C
+    Sleep    5s
+    Capture Page Screenshot
+    Close Browser
