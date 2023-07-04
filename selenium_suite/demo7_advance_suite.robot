@@ -13,6 +13,15 @@ TC1
     Click Element    xpath=//a[text()='Members Listing']
 
 TC2
+    Log To Console    hello\nworld\tdffddfdf
+    Log To Console    C:\\Mine\\Balaji-Profile_2023_1.pdf
+    Log To Console    C:${/}Mine${/}Balaji-Profile_2023_1.pdf
+    Log To Console    ${CURDIR}
+    Log To Console    ${EXECDIR}
+    Log To Console    ${OUTPUT_DIR}
+    Log To Console    ${TEMPDIR}
+
+TC2
     Open Browser    browser=chrome
     Maximize Browser Window
     Set Selenium Implicit Wait    10s
@@ -27,14 +36,14 @@ TC2
     Click Element    xpath=//a[text()='Click to Apply Online']
     
 TC3
-     Open Browser    browser=chrome
+    Open Browser    browser=chrome
     Maximize Browser Window
     Set Selenium Implicit Wait    10s
     Go To    url=https://www.ilovepdf.com/pdf_to_word
     Choose File    xpath=//input[@type='file']   C:${/}Mine${/}Balaji-Profile_2023_1.pdf
 
 *** Comments ***
-    Navigate onto http://demo.openemr.io/b/openemr/
+Navigate onto http://demo.openemr.io/b/openemr/
 Update username as admin
 Update password as pass
 Select language as English (Indian)
@@ -50,14 +59,6 @@ Update the gender
 Close the Happy Birthday popup
 Get the added patient name and print in the console.
 
-TC5
-    Log To Console    hello\nworld\tdffddfdf
-    Log To Console    C:\\Mine\\Balaji-Profile_2023_1.pdf
-    Log To Console    C:${/}Mine${/}Balaji-Profile_2023_1.pdf
-    Log To Console    ${CURDIR}
-    Log To Console    ${EXECDIR}
-    Log To Console    ${OUTPUT_DIR}
-    Log To Console    ${TEMPDIR}
 
 
 

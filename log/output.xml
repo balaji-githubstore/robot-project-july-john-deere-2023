@@ -1,59 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.1 (Python 3.11.4 on win32)" generated="20230704 12:39:36.786" rpa="false" schemaversion="4">
-<suite id="s1" name="Demo4 Frame Suite" source="C:\Mine\Company\John Deere July 2023\RobotProject\selenium_suite\demo4_frame_suite.robot">
-<test id="s1-t1" name="TC1" line="5">
+<robot generator="Robot 6.1 (Python 3.11.4 on win32)" generated="20230704 16:54:16.232" rpa="false" schemaversion="4">
+<suite id="s1" name="Demo7 Advance Suite" source="C:\Mine\Company\John Deere July 2023\RobotProject\selenium_suite\demo7_advance_suite.robot">
+<test id="s1-t1" name="TC3" line="29">
 <kw name="Open Browser" library="SeleniumLibrary">
 <arg>browser=chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20230704 12:39:37.058" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
-<msg timestamp="20230704 12:39:37.068" level="INFO">Executing: C:\Program Files\Python311\Lib\site-packages\selenium\webdriver\common\windows\selenium-manager.exe --browser chrome --output json</msg>
-<status status="PASS" starttime="20230704 12:39:37.058" endtime="20230704 12:39:38.462"/>
+<msg timestamp="20230704 16:54:16.505" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
+<msg timestamp="20230704 16:54:16.512" level="INFO">Executing: C:\Program Files\Python311\Lib\site-packages\selenium\webdriver\common\windows\selenium-manager.exe --browser chrome --output json</msg>
+<status status="PASS" starttime="20230704 16:54:16.505" endtime="20230704 16:54:17.974"/>
 </kw>
 <kw name="Maximize Browser Window" library="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20230704 12:39:38.462" endtime="20230704 12:39:38.575"/>
+<status status="PASS" starttime="20230704 16:54:17.974" endtime="20230704 16:54:18.092"/>
 </kw>
 <kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
-<arg>20s</arg>
+<arg>10s</arg>
 <doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" starttime="20230704 12:39:38.575" endtime="20230704 12:39:38.576"/>
+<status status="PASS" starttime="20230704 16:54:18.093" endtime="20230704 16:54:18.096"/>
 </kw>
 <kw name="Go To" library="SeleniumLibrary">
-<arg>url=https://netbanking.hdfcbank.com/netbanking/</arg>
+<arg>url=https://www.ilovepdf.com/pdf_to_word</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20230704 12:39:38.577" level="INFO">Opening url 'https://netbanking.hdfcbank.com/netbanking/'</msg>
-<status status="PASS" starttime="20230704 12:39:38.577" endtime="20230704 12:39:41.726"/>
+<msg timestamp="20230704 16:54:18.097" level="INFO">Opening url 'https://www.ilovepdf.com/pdf_to_word'</msg>
+<status status="PASS" starttime="20230704 16:54:18.097" endtime="20230704 16:54:24.982"/>
 </kw>
-<kw name="Select Frame" library="SeleniumLibrary">
-<arg>xpath=//frame[@name='login_page']</arg>
-<doc>Sets frame identified by ``locator`` as the current frame.</doc>
-<msg timestamp="20230704 12:39:41.727" level="INFO">Selecting frame 'xpath=//frame[@name='login_page']'.</msg>
-<status status="PASS" starttime="20230704 12:39:41.726" endtime="20230704 12:39:41.779"/>
+<kw name="Choose File" library="SeleniumLibrary">
+<arg>xpath=//input[@type='file']</arg>
+<arg>C:${/}Mine${/}Balaji-Profile_2023_1.pdf</arg>
+<doc>Inputs the ``file_path`` into the file input field ``locator``.</doc>
+<msg timestamp="20230704 16:54:24.984" level="INFO">Sending C:\Mine\Balaji-Profile_2023_1.pdf to browser.</msg>
+<status status="PASS" starttime="20230704 16:54:24.982" endtime="20230704 16:54:25.041"/>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>name=fldLoginUserId</arg>
-<arg>test123</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20230704 12:39:41.780" level="INFO">Typing text 'test123' into text field 'name=fldLoginUserId'.</msg>
-<status status="PASS" starttime="20230704 12:39:41.779" endtime="20230704 12:39:41.879"/>
-</kw>
-<kw name="Unselect Frame" library="SeleniumLibrary">
-<doc>Sets the main frame as the current frame.</doc>
-<status status="PASS" starttime="20230704 12:39:41.880" endtime="20230704 12:39:41.883"/>
-</kw>
-<kw name="Sleep" library="BuiltIn">
-<arg>2s</arg>
-<doc>Pauses the test executed for the given time.</doc>
-<msg timestamp="20230704 12:39:43.885" level="INFO">Slept 2 seconds</msg>
-<status status="PASS" starttime="20230704 12:39:41.883" endtime="20230704 12:39:43.885"/>
-</kw>
-<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
-<doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20230704 12:39:43.885" endtime="20230704 12:39:47.149"/>
-</kw>
-<status status="PASS" starttime="20230704 12:39:37.057" endtime="20230704 12:39:47.149"/>
+<status status="PASS" starttime="20230704 16:54:16.504" endtime="20230704 16:54:25.042"/>
 </test>
-<status status="PASS" starttime="20230704 12:39:36.788" endtime="20230704 12:39:47.150"/>
+<status status="PASS" starttime="20230704 16:54:16.234" endtime="20230704 16:54:25.042"/>
 </suite>
 <statistics>
 <total>
@@ -62,7 +42,7 @@
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Demo4 Frame Suite">Demo4 Frame Suite</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Demo7 Advance Suite">Demo7 Advance Suite</stat>
 </suite>
 </statistics>
 <errors>
