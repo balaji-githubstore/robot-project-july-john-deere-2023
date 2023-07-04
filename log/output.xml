@@ -1,100 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.1 (Python 3.11.4 on win32)" generated="20230704 10:55:34.756" rpa="false" schemaversion="4">
-<suite id="s1" name="Demo2 Suite" source="C:\Mine\Company\John Deere July 2023\RobotProject\selenium_suite\demo2_suite.robot">
-<test id="s1-t1" name="TC1" line="18">
+<robot generator="Robot 6.1 (Python 3.11.4 on win32)" generated="20230704 12:39:36.786" rpa="false" schemaversion="4">
+<suite id="s1" name="Demo4 Frame Suite" source="C:\Mine\Company\John Deere July 2023\RobotProject\selenium_suite\demo4_frame_suite.robot">
+<test id="s1-t1" name="TC1" line="5">
 <kw name="Open Browser" library="SeleniumLibrary">
 <arg>browser=chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20230704 10:55:35.031" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
-<msg timestamp="20230704 10:55:35.038" level="INFO">Executing: C:\Program Files\Python311\Lib\site-packages\selenium\webdriver\common\windows\selenium-manager.exe --browser chrome --output json</msg>
-<status status="PASS" starttime="20230704 10:55:35.030" endtime="20230704 10:55:36.500"/>
+<msg timestamp="20230704 12:39:37.058" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
+<msg timestamp="20230704 12:39:37.068" level="INFO">Executing: C:\Program Files\Python311\Lib\site-packages\selenium\webdriver\common\windows\selenium-manager.exe --browser chrome --output json</msg>
+<status status="PASS" starttime="20230704 12:39:37.058" endtime="20230704 12:39:38.462"/>
 </kw>
 <kw name="Maximize Browser Window" library="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20230704 10:55:36.501" endtime="20230704 10:55:36.618"/>
+<status status="PASS" starttime="20230704 12:39:38.462" endtime="20230704 12:39:38.575"/>
 </kw>
 <kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
 <arg>20s</arg>
 <doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" starttime="20230704 10:55:36.619" endtime="20230704 10:55:36.623"/>
+<status status="PASS" starttime="20230704 12:39:38.575" endtime="20230704 12:39:38.576"/>
 </kw>
 <kw name="Go To" library="SeleniumLibrary">
-<arg>url=https://www.salesforce.com/in/form/signup/freetrial-sales/</arg>
+<arg>url=https://netbanking.hdfcbank.com/netbanking/</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20230704 10:55:36.625" level="INFO">Opening url 'https://www.salesforce.com/in/form/signup/freetrial-sales/'</msg>
-<status status="PASS" starttime="20230704 10:55:36.623" endtime="20230704 10:55:44.717"/>
+<msg timestamp="20230704 12:39:38.577" level="INFO">Opening url 'https://netbanking.hdfcbank.com/netbanking/'</msg>
+<status status="PASS" starttime="20230704 12:39:38.577" endtime="20230704 12:39:41.726"/>
+</kw>
+<kw name="Select Frame" library="SeleniumLibrary">
+<arg>xpath=//frame[@name='login_page']</arg>
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<msg timestamp="20230704 12:39:41.727" level="INFO">Selecting frame 'xpath=//frame[@name='login_page']'.</msg>
+<status status="PASS" starttime="20230704 12:39:41.726" endtime="20230704 12:39:41.779"/>
 </kw>
 <kw name="Input Text" library="SeleniumLibrary">
-<arg>name=UserFirstName</arg>
-<arg>bala</arg>
+<arg>name=fldLoginUserId</arg>
+<arg>test123</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20230704 10:55:44.718" level="INFO">Typing text 'bala' into text field 'name=UserFirstName'.</msg>
-<status status="PASS" starttime="20230704 10:55:44.717" endtime="20230704 10:55:44.994"/>
+<msg timestamp="20230704 12:39:41.780" level="INFO">Typing text 'test123' into text field 'name=fldLoginUserId'.</msg>
+<status status="PASS" starttime="20230704 12:39:41.779" endtime="20230704 12:39:41.879"/>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>xpath=//input[contains(@id,'UserLast')]</arg>
-<arg>dina</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20230704 10:55:44.995" level="INFO">Typing text 'dina' into text field 'xpath=//input[contains(@id,'UserLast')]'.</msg>
-<status status="PASS" starttime="20230704 10:55:44.994" endtime="20230704 10:55:45.146"/>
+<kw name="Unselect Frame" library="SeleniumLibrary">
+<doc>Sets the main frame as the current frame.</doc>
+<status status="PASS" starttime="20230704 12:39:41.880" endtime="20230704 12:39:41.883"/>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>name=UserEmail</arg>
-<arg>bala@gmail.com</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20230704 10:55:45.147" level="INFO">Typing text 'bala@gmail.com' into text field 'name=UserEmail'.</msg>
-<status status="PASS" starttime="20230704 10:55:45.146" endtime="20230704 10:55:45.321"/>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230704 12:39:43.885" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230704 12:39:41.883" endtime="20230704 12:39:43.885"/>
 </kw>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>name=CompanyName</arg>
-<arg>CCCS</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20230704 10:55:45.322" level="INFO">Typing text 'CCCS' into text field 'name=CompanyName'.</msg>
-<status status="PASS" starttime="20230704 10:55:45.322" endtime="20230704 10:55:45.514"/>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20230704 12:39:43.885" endtime="20230704 12:39:47.149"/>
 </kw>
-<kw name="Select From List By Label" library="SeleniumLibrary">
-<arg>name=UserTitle</arg>
-<arg>IT Manager</arg>
-<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
-<msg timestamp="20230704 10:55:45.515" level="INFO">Selecting options from selection list 'name=UserTitle' by label IT Manager.</msg>
-<status status="PASS" starttime="20230704 10:55:45.514" endtime="20230704 10:55:45.643"/>
-</kw>
-<kw name="Select From List By Label" library="SeleniumLibrary">
-<arg>name=CompanyCountry</arg>
-<arg>United Kingdom</arg>
-<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
-<msg timestamp="20230704 10:55:45.644" level="INFO">Selecting options from selection list 'name=CompanyCountry' by label United Kingdom.</msg>
-<status status="PASS" starttime="20230704 10:55:45.644" endtime="20230704 10:55:45.755"/>
-</kw>
-<kw name="Select From List By Value" library="SeleniumLibrary">
-<arg>name=CompanyEmployees</arg>
-<arg>150</arg>
-<doc>Selects options from selection list ``locator`` by ``values``.</doc>
-<msg timestamp="20230704 10:55:45.757" level="INFO">Selecting options from selection list 'name=CompanyEmployees' by value 150.</msg>
-<status status="PASS" starttime="20230704 10:55:45.756" endtime="20230704 10:55:45.889"/>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>xpath=//select[@name='CompanyCountry']/following::div[@class='checkbox-ui']</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20230704 10:55:45.893" level="INFO">Clicking element 'xpath=//select[@name='CompanyCountry']/following::div[@class='checkbox-ui']'.</msg>
-<status status="PASS" starttime="20230704 10:55:45.890" endtime="20230704 10:55:46.033"/>
-</kw>
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>name=start my free trial</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20230704 10:55:46.034" level="INFO">Clicking element 'name=start my free trial'.</msg>
-<status status="PASS" starttime="20230704 10:55:46.033" endtime="20230704 10:55:46.245"/>
-</kw>
-<kw name="Element Text Should Be" library="SeleniumLibrary">
-<arg>//span[contains(@id,'UserPhone')]</arg>
-<arg>Enter a valid phone number</arg>
-<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
-<msg timestamp="20230704 10:55:46.248" level="INFO">Verifying element '//span[contains(@id,'UserPhone')]' contains exact text 'Enter a valid phone number'.</msg>
-<status status="PASS" starttime="20230704 10:55:46.246" endtime="20230704 10:55:46.281"/>
-</kw>
-<status status="PASS" starttime="20230704 10:55:35.030" endtime="20230704 10:55:46.282"/>
+<status status="PASS" starttime="20230704 12:39:37.057" endtime="20230704 12:39:47.149"/>
 </test>
-<status status="PASS" starttime="20230704 10:55:34.759" endtime="20230704 10:55:46.282"/>
+<status status="PASS" starttime="20230704 12:39:36.788" endtime="20230704 12:39:47.150"/>
 </suite>
 <statistics>
 <total>
@@ -103,7 +62,7 @@
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Demo2 Suite">Demo2 Suite</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Demo4 Frame Suite">Demo4 Frame Suite</stat>
 </suite>
 </statistics>
 <errors>
