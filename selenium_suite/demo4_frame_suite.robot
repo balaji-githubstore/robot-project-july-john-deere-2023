@@ -1,5 +1,6 @@
 *** Settings ***
-Library     SeleniumLibrary
+Library     SeleniumLibrary     run_on_failure=None
+Library    Collections
 
 *** Test Cases ***
 TC1
@@ -15,3 +16,18 @@ TC1
     Unselect Frame
     Sleep    2s
     [Teardown]   Close Browser
+
+TC2
+    Open Browser    browser=chrome
+    Maximize Browser Window
+    Set Selenium Implicit Wait    20s
+    Go To    url=file:///C:/Mine/HTML/demo1.html
+    Input Text    id=fname    hello
+    Select Frame    id=frame1
+    Select Frame    id=frame1A
+    Input Text    id=fname3    hello2
+    Unselect Frame
+    Input Text    id=fname    againhello   clear=False
+    Sleep    5s
+    Close Browser
+
