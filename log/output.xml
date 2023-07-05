@@ -1,39 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.1 (Python 3.11.4 on win32)" generated="20230704 16:54:16.232" rpa="false" schemaversion="4">
-<suite id="s1" name="Demo7 Advance Suite" source="C:\Mine\Company\John Deere July 2023\RobotProject\selenium_suite\demo7_advance_suite.robot">
-<test id="s1-t1" name="TC3" line="29">
-<kw name="Open Browser" library="SeleniumLibrary">
-<arg>browser=chrome</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20230704 16:54:16.505" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
-<msg timestamp="20230704 16:54:16.512" level="INFO">Executing: C:\Program Files\Python311\Lib\site-packages\selenium\webdriver\common\windows\selenium-manager.exe --browser chrome --output json</msg>
-<status status="PASS" starttime="20230704 16:54:16.505" endtime="20230704 16:54:17.974"/>
+<robot generator="Robot 6.1 (Python 3.11.4 on win32)" generated="20230705 17:41:11.625" rpa="false" schemaversion="4">
+<suite id="s1" name="Demo2 Suite" source="C:\Mine\Company\John Deere July 2023\RobotProject\api_suite\demo2_suite.robot">
+<kw name="Create Session" library="RequestsLibrary" type="SETUP">
+<arg>alias=petshop</arg>
+<arg>url=https://petstore.swagger.io/v2</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230705 17:41:11.940" level="INFO">Creating Session using : alias=petshop, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230705 17:41:11.939" endtime="20230705 17:41:11.944"/>
 </kw>
-<kw name="Maximize Browser Window" library="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20230704 16:54:17.974" endtime="20230704 16:54:18.092"/>
+<test id="s1-t1" name="TC1 Add Valid Pet To Store" line="9">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{header_dic}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Connection=keep-alive</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230705 17:41:11.948" level="INFO">&amp;{header_dic} = { Content-Type=application/json | Connection=keep-alive }</msg>
+<status status="PASS" starttime="20230705 17:41:11.946" endtime="20230705 17:41:11.948"/>
 </kw>
-<kw name="Set Selenium Implicit Wait" library="SeleniumLibrary">
-<arg>10s</arg>
-<doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" starttime="20230704 16:54:18.093" endtime="20230704 16:54:18.096"/>
+<kw name="Get Binary File" library="OperatingSystem">
+<var>${json}</var>
+<arg>${EXECDIR}${/}test_data${/}new_pet.json</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20230705 17:41:11.950" level="INFO" html="true">Getting file '&lt;a href="file://C:\Mine\Company\John Deere July 2023\RobotProject\test_data\new_pet.json"&gt;C:\Mine\Company\John Deere July 2023\RobotProject\test_data\new_pet.json&lt;/a&gt;'.</msg>
+<msg timestamp="20230705 17:41:11.951" level="INFO">${json} = {
+  "id": 705,
+  "category": {
+    "id": 10,
+    "name": "string-605"
+  },
+  "name": "doggie",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "string"
+...</msg>
+<status status="PASS" starttime="20230705 17:41:11.949" endtime="20230705 17:41:11.951"/>
 </kw>
-<kw name="Go To" library="SeleniumLibrary">
-<arg>url=https://www.ilovepdf.com/pdf_to_word</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20230704 16:54:18.097" level="INFO">Opening url 'https://www.ilovepdf.com/pdf_to_word'</msg>
-<status status="PASS" starttime="20230704 16:54:18.097" endtime="20230704 16:54:24.982"/>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230705 17:41:11.951" endtime="20230705 17:41:11.952"/>
 </kw>
-<kw name="Choose File" library="SeleniumLibrary">
-<arg>xpath=//input[@type='file']</arg>
-<arg>C:${/}Mine${/}Balaji-Profile_2023_1.pdf</arg>
-<doc>Inputs the ``file_path`` into the file input field ``locator``.</doc>
-<msg timestamp="20230704 16:54:24.984" level="INFO">Sending C:\Mine\Balaji-Profile_2023_1.pdf to browser.</msg>
-<status status="PASS" starttime="20230704 16:54:24.982" endtime="20230704 16:54:25.041"/>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>alias=petshop</arg>
+<arg>url=/pet</arg>
+<arg>headers=${header_dic}</arg>
+<arg>data=${json}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230705 17:41:12.900" level="INFO">POST Request : url=https://petstore.swagger.io/v2/pet 
+ path_url=/v2/pet 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '239'} 
+ body=b'{\r\n  "id": 705,\r\n  "category": {\r\n    "id": 10,\r\n    "name": "string-605"\r\n  },\r\n  "name": "doggie",\r\n  "photoUrls": [\r\n    "string"\r\n  ],\r\n  "tags": [\r\n    {\r\n      "id": 0,\r\n      "name": "string"\r\n    }\r\n  ],\r\n  "status": "available"\r\n}' 
+ </msg>
+<msg timestamp="20230705 17:41:12.901" level="INFO">POST Response : url=https://petstore.swagger.io/v2/pet 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 05 Jul 2023 12:11:13 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
+ body={"id":705,"category":{"id":10,"name":"string-605"},"name":"doggie","photoUrls":["string"],"tags":[{"id":0,"name":"string"}],"status":"available"} 
+ </msg>
+<msg timestamp="20230705 17:41:12.902" level="INFO">C:\Program Files\Python311\Lib\site-packages\urllib3\connectionpool.py:1056: InsecureRequestWarning: Unverified HTTPS request is being made to host 'petstore.swagger.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20230705 17:41:12.902" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230705 17:41:11.952" endtime="20230705 17:41:12.903"/>
 </kw>
-<status status="PASS" starttime="20230704 16:54:16.504" endtime="20230704 16:54:25.042"/>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${response.json()}[id]</arg>
+<arg>705</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20230705 17:41:12.906" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230705 17:41:12.904" endtime="20230705 17:41:12.907"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()}[name]</arg>
+<arg>doggie</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230705 17:41:12.908" endtime="20230705 17:41:12.911"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}[category][id]</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230705 17:41:12.912" endtime="20230705 17:41:12.915"/>
+</kw>
+<status status="PASS" starttime="20230705 17:41:11.945" endtime="20230705 17:41:12.915"/>
 </test>
-<status status="PASS" starttime="20230704 16:54:16.234" endtime="20230704 16:54:25.042"/>
+<kw name="Delete All Sessions" library="RequestsLibrary" type="TEARDOWN">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20230705 17:41:12.919" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20230705 17:41:12.918" endtime="20230705 17:41:12.919"/>
+</kw>
+<status status="PASS" starttime="20230705 17:41:11.635" endtime="20230705 17:41:12.920"/>
 </suite>
 <statistics>
 <total>
@@ -42,7 +103,7 @@
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Demo7 Advance Suite">Demo7 Advance Suite</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Demo2 Suite">Demo2 Suite</stat>
 </suite>
 </statistics>
 <errors>
