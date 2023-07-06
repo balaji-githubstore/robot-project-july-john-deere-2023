@@ -29,8 +29,11 @@ TC2
     Open Browser    browser=chrome
     Maximize Browser Window
     Set Selenium Implicit Wait    10s
+#    Set Selenium Timeout    30s
+#    Set Selenium Speed    1s
     Go To    url=https://www.db4free.net/
     #click on phpMyAdmin »
+#    SeleniumLibrary.Wait Until Page Contains Element    partial link=phpAdmin 
     Click Element    partial link=phpMyAdmin
     Switch Window   NEW
     #enter username as admin

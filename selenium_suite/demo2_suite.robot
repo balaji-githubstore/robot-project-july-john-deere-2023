@@ -13,6 +13,7 @@ Validate the error message displayed “Enter a valid phone number”
 
 *** Settings ***
 Library     SeleniumLibrary     
+Library    DatabaseLibrary
 
 *** Test Cases ***
 TC1
@@ -30,6 +31,9 @@ TC1
     Click Element    xpath=//select[@name='CompanyCountry']/following::div[@class='checkbox-ui']
     Click Element    name=start my free trial
     Element Text Should Be    //span[contains(@id,'UserPhone')]    Enter a valid phone number
+    Row Count Is Equal To X    select * from Products where first_name='bala' and lastname='dina'   1
+
+
 
 
 

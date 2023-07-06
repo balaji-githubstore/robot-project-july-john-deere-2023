@@ -4,6 +4,7 @@ Library     SeleniumLibrary
 *** Test Cases ***
 TC1
     Open Browser    url=https://www.facebook.com/       browser=chrome
+
     Sleep    5s
     #get the title and print
     ${actual_title}     Get Title
