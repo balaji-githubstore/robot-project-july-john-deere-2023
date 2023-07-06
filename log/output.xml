@@ -1,111 +1,1198 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.1 (Python 3.11.4 on win32)" generated="20230705 17:41:11.625" rpa="false" schemaversion="4">
-<suite id="s1" name="Demo2 Suite" source="C:\Mine\Company\John Deere July 2023\RobotProject\api_suite\demo2_suite.robot">
-<kw name="Create Session" library="RequestsLibrary" type="SETUP">
-<arg>alias=petshop</arg>
-<arg>url=https://petstore.swagger.io/v2</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<msg timestamp="20230705 17:41:11.940" level="INFO">Creating Session using : alias=petshop, url=https://petstore.swagger.io/v2, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20230705 17:41:11.939" endtime="20230705 17:41:11.944"/>
-</kw>
-<test id="s1-t1" name="TC1 Add Valid Pet To Store" line="9">
+<robot generator="Robot 5.0.1 (Python 3.11.4 on win32)" generated="20230706 17:30:52.985" rpa="false" schemaversion="3">
+<suite id="s1" name="Demo1 Android Suite" source="C:\Mine\Company\John Deere July 2023\RobotProject\appium_suite\demo1_android_suite.robot">
+<test id="s1-t1" name="TC2" line="52">
 <kw name="Create Dictionary" library="BuiltIn">
-<var>&amp;{header_dic}</var>
-<arg>Content-Type=application/json</arg>
-<arg>Connection=keep-alive</arg>
+<var>&amp;{option}</var>
+<arg>userName=dinakaranbalaji1</arg>
+<arg>accessKey=6yXRE4nK1fyvTHWA2kPD</arg>
+<arg>buildName=JohnDeereBuild</arg>
+<arg>projectName=JohnDeereProject</arg>
+<arg>sessionName=JohnDeereSession</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<msg timestamp="20230705 17:41:11.948" level="INFO">&amp;{header_dic} = { Content-Type=application/json | Connection=keep-alive }</msg>
-<status status="PASS" starttime="20230705 17:41:11.946" endtime="20230705 17:41:11.948"/>
+<msg timestamp="20230706 17:30:53.300" level="INFO">&amp;{option} = { userName=dinakaranbalaji1 | accessKey=6yXRE4nK1fyvTHWA2kPD | buildName=JohnDeereBuild | projectName=JohnDeereProject | sessionName=JohnDeereSession }</msg>
+<status status="PASS" starttime="20230706 17:30:53.299" endtime="20230706 17:30:53.301"/>
 </kw>
-<kw name="Get Binary File" library="OperatingSystem">
-<var>${json}</var>
-<arg>${EXECDIR}${/}test_data${/}new_pet.json</arg>
-<doc>Returns the contents of a specified file.</doc>
-<msg timestamp="20230705 17:41:11.950" level="INFO" html="true">Getting file '&lt;a href="file://C:\Mine\Company\John Deere July 2023\RobotProject\test_data\new_pet.json"&gt;C:\Mine\Company\John Deere July 2023\RobotProject\test_data\new_pet.json&lt;/a&gt;'.</msg>
-<msg timestamp="20230705 17:41:11.951" level="INFO">${json} = {
-  "id": 705,
-  "category": {
-    "id": 10,
-    "name": "string-605"
-  },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-...</msg>
-<status status="PASS" starttime="20230705 17:41:11.949" endtime="20230705 17:41:11.951"/>
+<kw name="Open Application" library="AppiumLibrary">
+<arg>remote_url=http://hub.browserstack.com/wd/hub</arg>
+<arg>platformName=android</arg>
+<arg>platformVersion=9.0</arg>
+<arg>deviceName=Google Pixel 3</arg>
+<arg>app=bs://d2c5e5bb50109f3b459472754a2c4d2c398d15a6</arg>
+<arg>bstack:options=${option}</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/server-args.md
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |
+| strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
+<status status="PASS" starttime="20230706 17:30:53.302" endtime="20230706 17:31:24.229"/>
 </kw>
-<kw name="Log To Console" library="BuiltIn">
-<arg>${json}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230705 17:41:11.951" endtime="20230705 17:41:11.952"/>
+<kw name="Set Appium Timeout" library="AppiumLibrary">
+<arg>30s</arg>
+<doc>Sets the timeout in seconds used by various keywords.</doc>
+<status status="PASS" starttime="20230706 17:31:24.229" endtime="20230706 17:31:24.230"/>
 </kw>
-<kw name="POST On Session" library="RequestsLibrary">
-<var>${response}</var>
-<arg>alias=petshop</arg>
-<arg>url=/pet</arg>
-<arg>headers=${header_dic}</arg>
-<arg>data=${json}</arg>
-<arg>expected_status=200</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<msg timestamp="20230705 17:41:12.900" level="INFO">POST Request : url=https://petstore.swagger.io/v2/pet 
- path_url=/v2/pet 
- headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '239'} 
- body=b'{\r\n  "id": 705,\r\n  "category": {\r\n    "id": 10,\r\n    "name": "string-605"\r\n  },\r\n  "name": "doggie",\r\n  "photoUrls": [\r\n    "string"\r\n  ],\r\n  "tags": [\r\n    {\r\n      "id": 0,\r\n      "name": "string"\r\n    }\r\n  ],\r\n  "status": "available"\r\n}' 
- </msg>
-<msg timestamp="20230705 17:41:12.901" level="INFO">POST Response : url=https://petstore.swagger.io/v2/pet 
- status=200, reason=OK 
- headers={'Date': 'Wed, 05 Jul 2023 12:11:13 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT', 'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization', 'Server': 'Jetty(9.2.9.v20150224)'} 
- body={"id":705,"category":{"id":10,"name":"string-605"},"name":"doggie","photoUrls":["string"],"tags":[{"id":0,"name":"string"}],"status":"available"} 
- </msg>
-<msg timestamp="20230705 17:41:12.902" level="INFO">C:\Program Files\Python311\Lib\site-packages\urllib3\connectionpool.py:1056: InsecureRequestWarning: Unverified HTTPS request is being made to host 'petstore.swagger.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
-  warnings.warn(</msg>
-<msg timestamp="20230705 17:41:12.902" level="INFO">${response} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20230705 17:41:11.952" endtime="20230705 17:41:12.903"/>
+<kw name="Wait and Click On Element">
+<arg>xpath=//*[@text='Dismiss']</arg>
+<kw name="Wait Until Page Contains Element" library="AppiumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<msg timestamp="20230706 17:31:27.200" level="INFO">xpath criteria: //*[@text='Dismiss']
+xpath criteria: //*[@text='Dismiss']
+xpath criteria: //*[@text='Dismiss']</msg>
+<status status="PASS" starttime="20230706 17:31:24.230" endtime="20230706 17:31:27.201"/>
 </kw>
-<kw name="Should Be Equal As Integers" library="BuiltIn">
-<arg>${response.json()}[id]</arg>
-<arg>705</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<msg timestamp="20230705 17:41:12.906" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<status status="PASS" starttime="20230705 17:41:12.904" endtime="20230705 17:41:12.907"/>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>${locator}</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20230706 17:31:27.206" level="INFO">Clicking element 'xpath=//*[@text='Dismiss']'.</msg>
+<msg timestamp="20230706 17:31:27.417" level="INFO">xpath criteria: //*[@text='Dismiss']</msg>
+<status status="PASS" starttime="20230706 17:31:27.202" endtime="20230706 17:31:27.417"/>
 </kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<arg>${response.json()}[name]</arg>
-<arg>doggie</arg>
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<status status="PASS" starttime="20230705 17:41:12.908" endtime="20230705 17:41:12.911"/>
+<status status="PASS" starttime="20230706 17:31:24.230" endtime="20230706 17:31:27.418"/>
 </kw>
-<kw name="Log To Console" library="BuiltIn">
-<arg>${response.json()}[category][id]</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230705 17:41:12.912" endtime="20230705 17:41:12.915"/>
+<kw name="Wait and Click On Element">
+<arg>xpath=//*[@text='Search']</arg>
+<kw name="Wait Until Page Contains Element" library="AppiumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<msg timestamp="20230706 17:31:28.164" level="INFO">xpath criteria: //*[@text='Search']</msg>
+<status status="PASS" starttime="20230706 17:31:27.419" endtime="20230706 17:31:28.165"/>
 </kw>
-<status status="PASS" starttime="20230705 17:41:11.945" endtime="20230705 17:41:12.915"/>
-</test>
-<kw name="Delete All Sessions" library="RequestsLibrary" type="TEARDOWN">
-<doc>Removes all the session objects</doc>
-<msg timestamp="20230705 17:41:12.919" level="INFO">Deleting All Sessions</msg>
-<status status="PASS" starttime="20230705 17:41:12.918" endtime="20230705 17:41:12.919"/>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>${locator}</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20230706 17:31:28.168" level="INFO">Clicking element 'xpath=//*[@text='Search']'.</msg>
+<msg timestamp="20230706 17:31:28.710" level="INFO">xpath criteria: //*[@text='Search']</msg>
+<status status="PASS" starttime="20230706 17:31:28.165" endtime="20230706 17:31:28.711"/>
 </kw>
-<status status="PASS" starttime="20230705 17:41:11.635" endtime="20230705 17:41:12.920"/>
-</suite>
-<statistics>
-<total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
-</total>
-<tag>
-</tag>
-<suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Demo2 Suite">Demo2 Suite</stat>
-</suite>
-</statistics>
-<errors>
-</errors>
-</robot>
+<status status="PASS" starttime="20230706 17:31:27.418" endtime="20230706 17:31:28.712"/>
+</kw>
+<kw name="Wait and Click On Element">
+<arg>xpath=//*[contains(@text,'Art')]</arg>
+<kw name="Wait Until Page Contains Element" library="AppiumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<msg timestamp="20230706 17:31:29.747" level="INFO">xpath criteria: //*[contains(@text,'Art')]</msg>
+<status status="PASS" starttime="20230706 17:31:28.714" endtime="20230706 17:31:29.747"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>${locator}</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20230706 17:31:29.753" level="INFO">Clicking element 'xpath=//*[contains(@text,'Art')]'.</msg>
+<msg timestamp="20230706 17:31:30.048" level="INFO">xpath criteria: //*[contains(@text,'Art')]</msg>
+<status status="PASS" starttime="20230706 17:31:29.748" endtime="20230706 17:31:30.049"/>
+</kw>
+<status status="PASS" starttime="20230706 17:31:28.713" endtime="20230706 17:31:30.049"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:31:31.086" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:31:31.087" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:31:30.049" endtime="20230706 17:31:31.087"/>
+</kw>
+<while condition="${count}==0">
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:31:31.088" endtime="20230706 17:31:34.872"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:31:35.743" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:31:35.745" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:31:34.872" endtime="20230706 17:31:35.745"/>
+</kw>
+<status status="PASS" starttime="20230706 17:31:31.087" endtime="20230706 17:31:35.746"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:31:35.747" endtime="20230706 17:31:39.539"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:31:40.403" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:31:40.403" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:31:39.539" endtime="20230706 17:31:40.404"/>
+</kw>
+<status status="PASS" starttime="20230706 17:31:35.746" endtime="20230706 17:31:40.404"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:31:40.406" endtime="20230706 17:31:44.200"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:31:45.151" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:31:45.152" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:31:44.201" endtime="20230706 17:31:45.152"/>
+</kw>
+<status status="PASS" starttime="20230706 17:31:40.405" endtime="20230706 17:31:45.152"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:31:45.153" endtime="20230706 17:31:48.909"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:31:50.148" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:31:50.148" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:31:48.910" endtime="20230706 17:31:50.149"/>
+</kw>
+<status status="PASS" starttime="20230706 17:31:45.152" endtime="20230706 17:31:50.149"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:31:50.151" endtime="20230706 17:31:53.977"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:31:54.172" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:31:54.173" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:31:53.978" endtime="20230706 17:31:54.173"/>
+</kw>
+<status status="PASS" starttime="20230706 17:31:50.150" endtime="20230706 17:31:54.173"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:31:54.174" endtime="20230706 17:31:57.964"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:31:58.169" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:31:58.170" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:31:57.964" endtime="20230706 17:31:58.170"/>
+</kw>
+<status status="PASS" starttime="20230706 17:31:54.173" endtime="20230706 17:31:58.170"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:31:58.171" endtime="20230706 17:32:01.995"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:02.248" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:02.249" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:01.995" endtime="20230706 17:32:02.249"/>
+</kw>
+<status status="PASS" starttime="20230706 17:31:58.170" endtime="20230706 17:32:02.249"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:02.250" endtime="20230706 17:32:06.002"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:06.185" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:06.186" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:06.002" endtime="20230706 17:32:06.186"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:02.250" endtime="20230706 17:32:06.186"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:06.187" endtime="20230706 17:32:09.902"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:10.192" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:10.193" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:09.903" endtime="20230706 17:32:10.193"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:06.187" endtime="20230706 17:32:10.193"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:10.194" endtime="20230706 17:32:13.923"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:14.128" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:14.129" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:13.925" endtime="20230706 17:32:14.129"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:10.193" endtime="20230706 17:32:14.129"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:14.131" endtime="20230706 17:32:17.873"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:18.107" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:18.108" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:17.874" endtime="20230706 17:32:18.110"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:14.130" endtime="20230706 17:32:18.111"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:18.114" endtime="20230706 17:32:21.843"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:22.077" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:22.078" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:21.843" endtime="20230706 17:32:22.078"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:18.113" endtime="20230706 17:32:22.078"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:22.079" endtime="20230706 17:32:25.822"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:26.014" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:26.014" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:25.823" endtime="20230706 17:32:26.014"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:22.079" endtime="20230706 17:32:26.015"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:26.016" endtime="20230706 17:32:29.777"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:30.007" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:30.008" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:29.777" endtime="20230706 17:32:30.008"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:26.016" endtime="20230706 17:32:30.008"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:30.009" endtime="20230706 17:32:33.725"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:33.916" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:33.916" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:33.726" endtime="20230706 17:32:33.916"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:30.009" endtime="20230706 17:32:33.917"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:33.918" endtime="20230706 17:32:37.617"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:37.815" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:37.815" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:37.618" endtime="20230706 17:32:37.815"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:33.917" endtime="20230706 17:32:37.815"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:37.816" endtime="20230706 17:32:41.630"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:41.821" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:41.822" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:41.630" endtime="20230706 17:32:41.822"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:37.816" endtime="20230706 17:32:41.822"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:41.822" endtime="20230706 17:32:45.620"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:45.809" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:45.810" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:45.621" endtime="20230706 17:32:45.810"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:41.822" endtime="20230706 17:32:45.810"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:45.811" endtime="20230706 17:32:49.611"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:49.845" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:49.846" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:49.611" endtime="20230706 17:32:49.846"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:45.811" endtime="20230706 17:32:49.847"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:49.848" endtime="20230706 17:32:53.585"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:53.778" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:53.778" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:53.585" endtime="20230706 17:32:53.778"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:49.847" endtime="20230706 17:32:53.779"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:53.779" endtime="20230706 17:32:57.734"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:32:57.930" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:32:57.931" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:32:57.734" endtime="20230706 17:32:57.931"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:53.779" endtime="20230706 17:32:57.932"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:32:57.933" endtime="20230706 17:33:01.798"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:02.151" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:02.151" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:01.799" endtime="20230706 17:33:02.151"/>
+</kw>
+<status status="PASS" starttime="20230706 17:32:57.932" endtime="20230706 17:33:02.151"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:02.152" endtime="20230706 17:33:05.860"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:06.031" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:06.031" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:05.860" endtime="20230706 17:33:06.031"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:02.152" endtime="20230706 17:33:06.032"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:06.033" endtime="20230706 17:33:09.800"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:09.971" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:09.971" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:09.800" endtime="20230706 17:33:09.971"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:06.032" endtime="20230706 17:33:09.971"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:09.972" endtime="20230706 17:33:13.721"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:13.881" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:13.882" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:13.722" endtime="20230706 17:33:13.882"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:09.972" endtime="20230706 17:33:13.882"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:13.883" endtime="20230706 17:33:17.609"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:17.850" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:17.851" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:17.610" endtime="20230706 17:33:17.851"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:13.883" endtime="20230706 17:33:17.851"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:17.853" endtime="20230706 17:33:21.622"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:21.805" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:21.806" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:21.623" endtime="20230706 17:33:21.806"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:17.852" endtime="20230706 17:33:21.807"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:21.810" endtime="20230706 17:33:25.557"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:25.722" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:25.722" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:25.558" endtime="20230706 17:33:25.722"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:21.809" endtime="20230706 17:33:25.722"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:25.723" endtime="20230706 17:33:29.422"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:29.592" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:29.593" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:29.423" endtime="20230706 17:33:29.593"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:25.723" endtime="20230706 17:33:29.594"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:29.595" endtime="20230706 17:33:33.319"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:33.501" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:33.502" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:33.320" endtime="20230706 17:33:33.502"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:29.595" endtime="20230706 17:33:33.502"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:33.503" endtime="20230706 17:33:37.348"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:37.539" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:37.539" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:37.349" endtime="20230706 17:33:37.539"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:33.503" endtime="20230706 17:33:37.540"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:37.542" endtime="20230706 17:33:41.329"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:41.505" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:41.505" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:41.329" endtime="20230706 17:33:41.505"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:37.542" endtime="20230706 17:33:41.505"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:41.507" endtime="20230706 17:33:45.284"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:45.473" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:45.474" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:45.284" endtime="20230706 17:33:45.474"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:41.506" endtime="20230706 17:33:45.474"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:45.476" endtime="20230706 17:33:49.257"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:49.418" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:49.419" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:49.258" endtime="20230706 17:33:49.419"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:45.476" endtime="20230706 17:33:49.419"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:49.420" endtime="20230706 17:33:53.133"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:53.323" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:53.324" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:53.133" endtime="20230706 17:33:53.325"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:49.420" endtime="20230706 17:33:53.325"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:53.326" endtime="20230706 17:33:57.115"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:33:57.281" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:33:57.282" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:33:57.116" endtime="20230706 17:33:57.282"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:53.325" endtime="20230706 17:33:57.282"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:33:57.283" endtime="20230706 17:34:01.094"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:01.287" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:01.288" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:01.095" endtime="20230706 17:34:01.288"/>
+</kw>
+<status status="PASS" starttime="20230706 17:33:57.283" endtime="20230706 17:34:01.288"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:01.289" endtime="20230706 17:34:05.028"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:05.188" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:05.188" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:05.029" endtime="20230706 17:34:05.188"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:01.289" endtime="20230706 17:34:05.188"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:05.190" endtime="20230706 17:34:08.882"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:09.068" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:09.068" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:08.883" endtime="20230706 17:34:09.069"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:05.189" endtime="20230706 17:34:09.069"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:09.071" endtime="20230706 17:34:12.872"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:13.101" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:13.101" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:12.872" endtime="20230706 17:34:13.101"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:09.070" endtime="20230706 17:34:13.102"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:13.102" endtime="20230706 17:34:16.841"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:17.034" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:17.034" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:16.842" endtime="20230706 17:34:17.034"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:13.102" endtime="20230706 17:34:17.035"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:17.035" endtime="20230706 17:34:20.835"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:21.023" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:21.024" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:20.835" endtime="20230706 17:34:21.024"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:17.035" endtime="20230706 17:34:21.024"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:21.025" endtime="20230706 17:34:25.086"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:25.317" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:25.317" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:25.087" endtime="20230706 17:34:25.318"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:21.025" endtime="20230706 17:34:25.318"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:25.319" endtime="20230706 17:34:29.192"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:29.400" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:29.400" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:29.193" endtime="20230706 17:34:29.400"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:25.318" endtime="20230706 17:34:29.401"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:29.401" endtime="20230706 17:34:33.144"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:33.351" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:33.351" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:33.145" endtime="20230706 17:34:33.352"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:29.401" endtime="20230706 17:34:33.352"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:33.353" endtime="20230706 17:34:37.121"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:37.301" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:37.302" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:37.121" endtime="20230706 17:34:37.302"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:33.353" endtime="20230706 17:34:37.302"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:37.302" endtime="20230706 17:34:41.230"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:42.272" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:42.273" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:41.231" endtime="20230706 17:34:42.273"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:37.302" endtime="20230706 17:34:42.274"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:42.276" endtime="20230706 17:34:46.024"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:46.220" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:46.220" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:46.025" endtime="20230706 17:34:46.221"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:42.275" endtime="20230706 17:34:46.221"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:46.222" endtime="20230706 17:34:49.954"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:50.124" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:50.126" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:49.955" endtime="20230706 17:34:50.126"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:46.221" endtime="20230706 17:34:50.127"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:50.129" endtime="20230706 17:34:53.873"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:54.045" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:54.045" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:53.873" endtime="20230706 17:34:54.045"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:50.128" endtime="20230706 17:34:54.045"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:54.046" endtime="20230706 17:34:57.766"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:34:57.941" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:34:57.942" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:34:57.767" endtime="20230706 17:34:57.942"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:54.046" endtime="20230706 17:34:57.943"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>Swipe from one percent of the screen to another percent, for an optional duration.
+Normal swipe fails to scale for different screen resolutions, this can be avoided using percent.</doc>
+<status status="PASS" starttime="20230706 17:34:57.945" endtime="20230706 17:35:01.709"/>
+</kw>
+<kw name="Get Matching Xpath Count" library="AppiumLibrary">
+<var>${count}</var>
+<arg>xpath=//*[@text='World History']</arg>
+<doc>Returns number of elements matching ``xpath``</doc>
+<msg timestamp="20230706 17:35:01.931" level="INFO">xpath criteria: //*[@text='World History']</msg>
+<msg timestamp="20230706 17:35:01.932" level="INFO">${count} = 0</msg>
+<status status="PASS" starttime="20230706 17:35:01.710" endtime="20230706 17:35:01.932"/>
+</kw>
+<status status="PASS" starttime="20230706 17:34:57.944" endtime="20230706 17:35:01.932"/>
+</iter>
+<iter>
+<kw name="Swipe By Percent" library="AppiumLibrary">
+<arg>90</arg>
+<arg>75</arg>
+<arg>90</arg>
+<arg>25</arg>
+<arg>1000</arg>
+<doc>
