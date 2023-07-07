@@ -1,9 +1,13 @@
 *** Settings ***
 Library     SeleniumLibrary
+Test Teardown      Close Browser
+
+*** Variables ***
+${BROWSER}      edge
 #basic selenium - day1
 *** Test Cases ***
 TC1
-    Open Browser    url=https://www.facebook.com/       browser=chrome
+    Open Browser    url=https://www.facebook.com/       browser=${BROWSER}
 
     Sleep    5s
     #get the title and print
