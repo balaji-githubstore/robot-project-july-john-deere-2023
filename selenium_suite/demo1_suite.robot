@@ -3,7 +3,7 @@ Library     SeleniumLibrary
 Test Teardown      Close Browser
 
 *** Variables ***
-${BROWSER}      edge
+${BROWSER}      chrome
 #basic selenium - day1
 *** Test Cases ***
 TC1
