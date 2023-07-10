@@ -1,0 +1,22 @@
+{
+  "id": 705,
+  "category": {
+    "id": 10,
+    "name": "string-605"
+  },
+  "name": "doggie",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 1012,
+      "name": "john"
+    },
+    {
+      "id": 20,
+      "name": "dina"
+    }
+  ],
+  "status": "available"
+}

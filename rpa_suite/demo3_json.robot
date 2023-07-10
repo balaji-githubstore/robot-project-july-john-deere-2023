@@ -14,6 +14,7 @@ TC1
      Log    ${value}
      ${values}      Get values from JSON    ${json}    $..id
      Log    ${values}
+
 TC2
     ${json}     Load JSON from file     ${EXECDIR}${/}test_data${/}data.json
     ${json}     Update value to JSON    ${json}    $..id    809

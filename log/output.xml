@@ -1,27 +1,666 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 5.0.1 (Python 3.11.4 on win32)" generated="20230707 16:46:06.084" rpa="false" schemaversion="3">
-<suite id="s1" name="Demo3" source="C:\Mine\Company\John Deere July 2023\RobotProject\rpa_suite\demo3.robot">
+<robot generator="Robot 5.0.1 (Python 3.11.4 on win32)" generated="20230711 01:01:09.903" rpa="false" schemaversion="3">
+<suite id="s1" name="Excel To Json" source="C:\Mine\Company\John Deere July 2023\RobotProject\rpa_suite\excel_to_json.robot">
 <test id="s1-t1" name="TC1" line="6">
-<kw name="Add Two Value" library="demo1">
-<var>${res}</var>
-<arg>2</arg>
-<arg>2</arg>
-<msg timestamp="20230707 16:46:06.118" level="INFO">${res} = 4.0</msg>
-<status status="PASS" starttime="20230707 16:46:06.118" endtime="20230707 16:46:06.120"/>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>path=${EXECDIR}${/}ExcelJSONSuite${/}open_emr_data.xlsx</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230711 01:01:10.468" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x00000253B69809D0&gt;</msg>
+<status status="PASS" starttime="20230711 01:01:10.437" endtime="20230711 01:01:10.468"/>
 </kw>
-<kw name="Log To Console" library="BuiltIn">
-<arg>${res}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230707 16:46:06.120" endtime="20230707 16:46:06.121"/>
+<kw name="Read Worksheet" library="RPA.Excel.Files">
+<var>${sheet}</var>
+<doc>Read the content of a worksheet into a list of dictionaries.</doc>
+<msg timestamp="20230711 01:01:10.468" level="INFO">${sheet} = [{'A': 'H1', 'B': 'H2'}, {'A': 'id', 'B': 101}, {'A': 'name', 'B': 'john'}, {'A': 'tag-id', 'B': 11}, {'A': 'tag-name', 'B': 'peter1'}, {'A': 'tag-id', 'B': 12}, {'A': 'tag-name', 'B': 'peter2'}]</msg>
+<status status="PASS" starttime="20230711 01:01:10.468" endtime="20230711 01:01:10.468"/>
 </kw>
-<kw name="Log To Console" library="BuiltIn">
+<kw name="Get Length" library="BuiltIn">
+<var>${row_count}</var>
+<arg>${sheet}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230711 01:01:10.468" level="INFO">Length is 7</msg>
+<msg timestamp="20230711 01:01:10.468" level="INFO">${row_count} = 7</msg>
+<status status="PASS" starttime="20230711 01:01:10.468" endtime="20230711 01:01:10.468"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${row_count}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.476" level="INFO">7</msg>
+<status status="PASS" starttime="20230711 01:01:10.468" endtime="20230711 01:01:10.476"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${col_count}</var>
+<arg>${sheet}[0]</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230711 01:01:10.476" level="INFO">Length is 2</msg>
+<msg timestamp="20230711 01:01:10.476" level="INFO">${col_count} = 2</msg>
+<status status="PASS" starttime="20230711 01:01:10.476" endtime="20230711 01:01:10.476"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${col_count}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.476" level="INFO">2</msg>
+<status status="PASS" starttime="20230711 01:01:10.476" endtime="20230711 01:01:10.476"/>
+</kw>
+<kw name="Load JSON from file" library="RPA.JSON">
+<var>${json}</var>
+<arg>ExcelJSONSuite${/}data_template.json</arg>
+<doc>Load JSON data from a file, and return it as JSON serializable object.
+Depending on the input file the object can be either a dictionary,
+a list, or a scalar value.</doc>
+<msg timestamp="20230711 01:01:10.476" level="INFO">Loading JSON from file: ExcelJSONSuite\data_template.json</msg>
+<msg timestamp="20230711 01:01:10.476" level="INFO">${json} = {'id': 705, 'category': {'id': 10, 'name': 'string-605'}, 'name': 'doggie', 'photoUrls': ['string'], 'tags': [{'id': 1012, 'name': 'john'}, {'id': 20, 'name': 'dina'}, {'id': 0, 'name': 'na'}, {'id': ...</msg>
+<status status="PASS" starttime="20230711 01:01:10.476" endtime="20230711 01:01:10.476"/>
+</kw>
+<kw name="Get value from JSON" library="RPA.JSON">
+<var>${name}</var>
+<arg>${json}</arg>
+<arg>$..tags[0].id</arg>
+<doc>Get a single value from a JSON serializable object that matches the given expression.</doc>
+<msg timestamp="20230711 01:01:10.476" level="INFO">Get value from JSON with expression: '$..tags[0].id'</msg>
+<msg timestamp="20230711 01:01:10.538" level="INFO">${name} = 1012</msg>
+<status status="PASS" starttime="20230711 01:01:10.476" endtime="20230711 01:01:10.538"/>
+</kw>
+<kw name="Log" library="BuiltIn">
 <arg>${name}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20230707 16:46:06.121" endtime="20230707 16:46:06.122"/>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.538" level="INFO">1012</msg>
+<status status="PASS" starttime="20230711 01:01:10.538" endtime="20230711 01:01:10.538"/>
 </kw>
-<status status="PASS" starttime="20230707 16:46:06.117" endtime="20230707 16:46:06.122"/>
+<kw name="Log" library="BuiltIn">
+<arg>${json}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.538" level="INFO">{'id': 705, 'category': {'id': 10, 'name': 'string-605'}, 'name': 'doggie', 'photoUrls': ['string'], 'tags': [{'id': 1012, 'name': 'john'}, {'id': 20, 'name': 'dina'}, {'id': 0, 'name': 'na'}, {'id': 0, 'name': 'na'}], 'status': 'available'}</msg>
+<status status="PASS" starttime="20230711 01:01:10.538" endtime="20230711 01:01:10.538"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${tag_id_count}</var>
+<arg>0</arg>
+<doc>Converts the given item to an integer number.</doc>
+<msg timestamp="20230711 01:01:10.538" level="INFO">${tag_id_count} = 0</msg>
+<status status="PASS" starttime="20230711 01:01:10.538" endtime="20230711 01:01:10.538"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${tag_name_count}</var>
+<arg>0</arg>
+<doc>Converts the given item to an integer number.</doc>
+<msg timestamp="20230711 01:01:10.554" level="INFO">${tag_name_count} = 0</msg>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.554"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${r}</var>
+<value>2</value>
+<value>${row_count}+1</value>
+<iter>
+<var name="${r}">2</var>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val1}</var>
+<arg>${r}</arg>
+<arg>1</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.554" level="INFO">${val1} = id</msg>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.554"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${val1}</var>
+<arg>${val1}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230711 01:01:10.554" level="INFO">${val1} = id</msg>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.554"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val1}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.554" level="INFO">id</msg>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.554"/>
+</kw>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val2}</var>
+<arg>${r}</arg>
+<arg>2</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.554" level="INFO">${val2} = 101</msg>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.554"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val2}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.554" level="INFO">101</msg>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.554"/>
+</kw>
+<if>
+<branch type="IF" condition="'${val1}'=='id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<msg timestamp="20230711 01:01:10.554" level="INFO">Update JSON with expression: '$..id'</msg>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.585"/>
+</kw>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.585"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_id_count}].id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_id_count}</var>
+<arg>${tag_id_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-name'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_name_count}].name</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_name_count}</var>
+<arg>${tag_name_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</branch>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.585"/>
+</if>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.585"/>
+</iter>
+<iter>
+<var name="${r}">3</var>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val1}</var>
+<arg>${r}</arg>
+<arg>1</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.585" level="INFO">${val1} = name</msg>
+<status status="PASS" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${val1}</var>
+<arg>${val1}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230711 01:01:10.585" level="INFO">${val1} = name</msg>
+<status status="PASS" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val1}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.585" level="INFO">name</msg>
+<status status="PASS" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</kw>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val2}</var>
+<arg>${r}</arg>
+<arg>2</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.585" level="INFO">${val2} = john</msg>
+<status status="PASS" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val2}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.585" level="INFO">john</msg>
+<status status="PASS" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</kw>
+<if>
+<branch type="IF" condition="'${val1}'=='id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.585"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_id_count}].id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.601"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_id_count}</var>
+<arg>${tag_id_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.601"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-name'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_name_count}].name</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_name_count}</var>
+<arg>${tag_name_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</branch>
+<status status="PASS" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.601"/>
+</if>
+<status status="PASS" starttime="20230711 01:01:10.585" endtime="20230711 01:01:10.601"/>
+</iter>
+<iter>
+<var name="${r}">4</var>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val1}</var>
+<arg>${r}</arg>
+<arg>1</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.601" level="INFO">${val1} = tag-id</msg>
+<status status="PASS" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${val1}</var>
+<arg>${val1}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230711 01:01:10.601" level="INFO">${val1} = tag-id</msg>
+<status status="PASS" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val1}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.601" level="INFO">tag-id</msg>
+<status status="PASS" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</kw>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val2}</var>
+<arg>${r}</arg>
+<arg>2</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.601" level="INFO">${val2} = 11</msg>
+<status status="PASS" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val2}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.601" level="INFO">11</msg>
+<status status="PASS" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</kw>
+<if>
+<branch type="IF" condition="'${val1}'=='id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.601"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_id_count}].id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<msg timestamp="20230711 01:01:10.601" level="INFO">Update JSON with expression: '$..tags[0].id'</msg>
+<status status="PASS" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.670"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_id_count}</var>
+<arg>${tag_id_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230711 01:01:10.676" level="INFO">${tag_id_count} = 1</msg>
+<status status="PASS" starttime="20230711 01:01:10.676" endtime="20230711 01:01:10.676"/>
+</kw>
+<status status="PASS" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.676"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-name'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_name_count}].name</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.676" endtime="20230711 01:01:10.676"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_name_count}</var>
+<arg>${tag_name_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.676" endtime="20230711 01:01:10.676"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.676" endtime="20230711 01:01:10.676"/>
+</branch>
+<status status="PASS" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.676"/>
+</if>
+<status status="PASS" starttime="20230711 01:01:10.601" endtime="20230711 01:01:10.676"/>
+</iter>
+<iter>
+<var name="${r}">5</var>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val1}</var>
+<arg>${r}</arg>
+<arg>1</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.676" level="INFO">${val1} = tag-name</msg>
+<status status="PASS" starttime="20230711 01:01:10.676" endtime="20230711 01:01:10.676"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${val1}</var>
+<arg>${val1}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230711 01:01:10.676" level="INFO">${val1} = tag-name</msg>
+<status status="PASS" starttime="20230711 01:01:10.676" endtime="20230711 01:01:10.676"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val1}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.676" level="INFO">tag-name</msg>
+<status status="PASS" starttime="20230711 01:01:10.676" endtime="20230711 01:01:10.676"/>
+</kw>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val2}</var>
+<arg>${r}</arg>
+<arg>2</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.676" level="INFO">${val2} = peter1</msg>
+<status status="PASS" starttime="20230711 01:01:10.676" endtime="20230711 01:01:10.676"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val2}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.692" level="INFO">peter1</msg>
+<status status="PASS" starttime="20230711 01:01:10.676" endtime="20230711 01:01:10.692"/>
+</kw>
+<if>
+<branch type="IF" condition="'${val1}'=='id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.692" endtime="20230711 01:01:10.692"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.692" endtime="20230711 01:01:10.692"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_id_count}].id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.692" endtime="20230711 01:01:10.692"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_id_count}</var>
+<arg>${tag_id_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.692" endtime="20230711 01:01:10.692"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.692" endtime="20230711 01:01:10.692"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-name'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_name_count}].name</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<msg timestamp="20230711 01:01:10.692" level="INFO">Update JSON with expression: '$..tags[0].name'</msg>
+<status status="PASS" starttime="20230711 01:01:10.692" endtime="20230711 01:01:10.723"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_name_count}</var>
+<arg>${tag_name_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230711 01:01:10.739" level="INFO">${tag_name_count} = 1</msg>
+<status status="PASS" starttime="20230711 01:01:10.723" endtime="20230711 01:01:10.739"/>
+</kw>
+<status status="PASS" starttime="20230711 01:01:10.692" endtime="20230711 01:01:10.739"/>
+</branch>
+<status status="PASS" starttime="20230711 01:01:10.692" endtime="20230711 01:01:10.739"/>
+</if>
+<status status="PASS" starttime="20230711 01:01:10.676" endtime="20230711 01:01:10.739"/>
+</iter>
+<iter>
+<var name="${r}">6</var>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val1}</var>
+<arg>${r}</arg>
+<arg>1</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.739" level="INFO">${val1} = tag-id</msg>
+<status status="PASS" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.739"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${val1}</var>
+<arg>${val1}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230711 01:01:10.739" level="INFO">${val1} = tag-id</msg>
+<status status="PASS" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.739"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val1}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.739" level="INFO">tag-id</msg>
+<status status="PASS" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.739"/>
+</kw>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val2}</var>
+<arg>${r}</arg>
+<arg>2</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.739" level="INFO">${val2} = 12</msg>
+<status status="PASS" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.739"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val2}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.739" level="INFO">12</msg>
+<status status="PASS" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.739"/>
+</kw>
+<if>
+<branch type="IF" condition="'${val1}'=='id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.739"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.739"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_id_count}].id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<msg timestamp="20230711 01:01:10.739" level="INFO">Update JSON with expression: '$..tags[1].id'</msg>
+<status status="PASS" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.770"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_id_count}</var>
+<arg>${tag_id_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230711 01:01:10.770" level="INFO">${tag_id_count} = 2</msg>
+<status status="PASS" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<status status="PASS" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.770"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-name'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_name_count}].name</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_name_count}</var>
+<arg>${tag_name_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</branch>
+<status status="PASS" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.770"/>
+</if>
+<status status="PASS" starttime="20230711 01:01:10.739" endtime="20230711 01:01:10.770"/>
+</iter>
+<iter>
+<var name="${r}">7</var>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val1}</var>
+<arg>${r}</arg>
+<arg>1</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.770" level="INFO">${val1} = tag-name</msg>
+<status status="PASS" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${val1}</var>
+<arg>${val1}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230711 01:01:10.770" level="INFO">${val1} = tag-name</msg>
+<status status="PASS" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val1}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.770" level="INFO">tag-name</msg>
+<status status="PASS" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<kw name="Get Worksheet Value" library="RPA.Excel.Files">
+<var>${val2}</var>
+<arg>${r}</arg>
+<arg>2</arg>
+<doc>Alias for keyword ``Get cell value``, see the original keyword
+for documentation.</doc>
+<msg timestamp="20230711 01:01:10.770" level="INFO">${val2} = peter2</msg>
+<status status="PASS" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${val2}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.770" level="INFO">peter2</msg>
+<status status="PASS" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<if>
+<branch type="IF" condition="'${val1}'=='id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-id'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_id_count}].id</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_id_count}</var>
+<arg>${tag_id_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</kw>
+<status status="NOT RUN" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.770"/>
+</branch>
+<branch type="ELSE IF" condition="'${val1}'=='tag-name'">
+<kw name="Update value to JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[${tag_name_count}].name</arg>
+<arg>${val2}</arg>
+<doc>Update existing values in a JSON serializable object and return the result.
+Will change all values that match the expression.</doc>
+<msg timestamp="20230711 01:01:10.770" level="INFO">Update JSON with expression: '$..tags[1].name'</msg>
+<status status="PASS" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.801"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${tag_name_count}</var>
+<arg>${tag_name_count}+1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230711 01:01:10.801" level="INFO">${tag_name_count} = 2</msg>
+<status status="PASS" starttime="20230711 01:01:10.801" endtime="20230711 01:01:10.801"/>
+</kw>
+<status status="PASS" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.801"/>
+</branch>
+<status status="PASS" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.801"/>
+</if>
+<status status="PASS" starttime="20230711 01:01:10.770" endtime="20230711 01:01:10.801"/>
+</iter>
+<status status="PASS" starttime="20230711 01:01:10.554" endtime="20230711 01:01:10.801"/>
+</for>
+<kw name="Delete from JSON" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>$..tags[?(@..name=='na')]</arg>
+<doc>Delete values from a JSON serializable object and return the result.
+Will delete all values that match the expression.</doc>
+<msg timestamp="20230711 01:01:10.801" level="INFO">Delete from JSON with expression: "$..tags[?(@..name=='na')]"</msg>
+<status status="PASS" starttime="20230711 01:01:10.801" endtime="20230711 01:01:10.822"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${json}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230711 01:01:10.822" level="INFO">{'id': 101, 'category': {'id': 101, 'name': 'string-605'}, 'name': 'doggie', 'photoUrls': ['string'], 'tags': [{'id': 11, 'name': 'peter1'}, {'id': 12, 'name': 'peter2'}], 'status': 'available'}</msg>
+<status status="PASS" starttime="20230711 01:01:10.822" endtime="20230711 01:01:10.822"/>
+</kw>
+<kw name="Save JSON to file" library="RPA.JSON">
+<arg>${json}</arg>
+<arg>${EXECDIR}/ExcelJSONSuite/data_final.js</arg>
+<doc>Save a JSON serializable object or a string containing
+a JSON value into a file.</doc>
+<msg timestamp="20230711 01:01:10.822" level="INFO">Saving JSON to file: C:\Mine\Company\John Deere July 2023\RobotProject/ExcelJSONSuite/data_final.js</msg>
+<status status="PASS" starttime="20230711 01:01:10.822" endtime="20230711 01:01:10.822"/>
+</kw>
+<status status="PASS" starttime="20230711 01:01:10.437" endtime="20230711 01:01:10.822"/>
 </test>
-<status status="PASS" starttime="20230707 16:46:06.086" endtime="20230707 16:46:06.122"/>
+<status status="PASS" starttime="20230711 01:01:09.903" endtime="20230711 01:01:10.822"/>
 </suite>
 <statistics>
 <total>
@@ -30,7 +669,7 @@
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Demo3">Demo3</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Excel To Json">Excel To Json</stat>
 </suite>
 </statistics>
 <errors>
